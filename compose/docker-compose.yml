@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  php-fpm:
+    image: klocki/php-fpm:${APP_VERSION}
+    volumes:
+      - ../application:/application:delegated
+    restart: ${PHP_FPM_RESTART}
+    env_file:
+      - ../.env
+
+  nginx:
+    image: klocki/nginx:${APP_VERSION}
+    volumes:
+      - ../application:/application:delegated
+      - ../docker/nginx/ssl:/etc/nginx/ssl
+    ports:
+      - ${NGINX_HTTP_PORT}:443
+    depends_on:
+      - php-fpm
+    restart: ${NGINX_RESTART}
+    env_file:
+      - ../.env
+
+  db:
+    image: mysql:5.7.30
+    restart: always
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  application:
+  my-db:

@@ -1,0 +1,60 @@
+version: "3"
+
+silent: true
+
+vars:
+  PHP_FPM_DOCKER_IMAGE: klocki/php-fpm
+  NGINX_DOCKER_IMAGE: klocki/nginx
+
+tasks:
+  up:
+    desc: 'Starts all docker container'
+    cmds:
+      - docker-compose up -d
+
+  install:
+    desc: 'Installs composer dependencies'
+    cmds:
+      - docker-compose exec php-fpm composer install
+
+  stop:
+    desc: 'Stops all docker containers'
+    cmds:
+      - docker-compose stop
+  
+  down:
+    desc: 'Removes application containers'
+    cmds:
+      - docker-compose down
+
+  restart:
+    desc: 'Restarts all docker containers'
+    cmds:
+      - task: stop
+      - task: up
+
+  bash:
+    desc: 'Enters the php-fpm container'
+    cmds:
+      - docker-compose exec php-fpm bash
+
+  build-php-fpm:
+    desc: 'Builds the php-fpm docker image'
+    cmds:
+      - docker build --no-cache -f ./docker/php-fpm/Dockerfile -t {{.PHP_FPM_DOCKER_IMAGE}}:unreleased .
+
+  build-nginx:
+    desc: 'Builds the nginx docker image'
+    cmds:
+      - docker build --no-cache -f ./docker/nginx/Dockerfile -t {{.NGINX_DOCKER_IMAGE}}:unreleased .
+
+  build-images:
+    desc: 'Builds docker images'
+    cmds:
+      - task: build-php-fpm
+      - task: build-nginx
+
+  db-reset:
+    desc: 'Drops database, runs all migrations and seeders'
+    cmds:
+      - docker-compose exec php-fpm php artisan migrate:fresh --seed

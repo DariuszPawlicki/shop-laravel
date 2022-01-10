@@ -10,6 +10,7 @@ final class Order
 {
     public function __construct(
         private int $id,
+        private int $userId,
         private string $series,
         private string $name,
         private string $number,
@@ -26,6 +27,11 @@ final class Order
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
     }
 
     public function getSeries(): string

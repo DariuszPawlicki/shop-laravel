@@ -12,6 +12,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table): void {
             $table->id();
+            $table->bigInteger('user_id')->unsigned();  
             $table->text('series');
             $table->text('name');
             $table->text('number');
@@ -23,6 +24,8 @@ class CreateOrdersTable extends Migration
             $table->date('order_date');
             $table->date('delivery_date')->nullable()->default(null);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

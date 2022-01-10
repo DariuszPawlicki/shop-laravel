@@ -19,4 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', ['middleware' => 'auth', 'uses' => 'App\Http\Controllers\HomeController@index']);
+Route::get('/api/orders', ['middleware' => 'auth', 'uses' => 'App\Http\Controllers\OrderController@index']);
+
+Route::post('/api/orders', ['middleware' => 'auth', 'uses' => 'App\Http\Controllers\OrderController@store']);

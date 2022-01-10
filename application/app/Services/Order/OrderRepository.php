@@ -13,6 +13,7 @@ final class OrderRepository implements OrderRepositoryContract
 {
     public function store(
         string $series,
+        int $userId,
         string $name,
         string $number,
         int $amount,
@@ -25,6 +26,7 @@ final class OrderRepository implements OrderRepositoryContract
     ): void {
         $orderModel = new OrderModel();
         $orderModel->series = $series;
+        $orderModel->user_id = $userId;
         $orderModel->name = $name;
         $orderModel->number = $number;
         $orderModel->amount = $amount;
@@ -40,6 +42,7 @@ final class OrderRepository implements OrderRepositoryContract
     public function getAll(): Collection
     {
         return OrderModel::orderByDesc('created_at')
+            ->where('user_id', '=', auth()->id())
             ->get()
             ->map(fn(OrderModel $orderModel): Order => $this->mapToOrder($orderModel));
     }
@@ -85,6 +88,7 @@ final class OrderRepository implements OrderRepositoryContract
     {
         return new Order(
             $orderModel->id,
+            $orderModel->user_id,
             $orderModel->series,
             $orderModel->name,
             $orderModel->number,

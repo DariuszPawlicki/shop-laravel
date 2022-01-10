@@ -16,6 +16,7 @@ class OrderResource extends JsonResource
 
         return [
             'id' => $order->getId(),
+            'user_id' => $order->getUserId(),
             'series' => $order->getSeries(),
             'name' => $order->getName(),
             'number' => $order->getNumber(),

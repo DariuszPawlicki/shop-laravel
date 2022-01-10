@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $series
+ * @property int $user_id
  * @property string $name
  * @property string $number
  * @property int $amount

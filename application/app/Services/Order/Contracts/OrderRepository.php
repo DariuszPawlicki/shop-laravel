@@ -12,6 +12,7 @@ interface OrderRepository
 {
     public function store(
         string $series,
+        int $userId,
         string $name,
         string $number,
         int $amount,

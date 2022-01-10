@@ -13,6 +13,8 @@ use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Auth;
+
 
 class OrderController extends Controller
 {
@@ -20,6 +22,7 @@ class OrderController extends Controller
 
     public function __construct(OrderRepository $orderRepository)
     {
+        $this->middleware('auth');
         $this->orderRepository = $orderRepository;
     }
 
@@ -33,9 +36,10 @@ class OrderController extends Controller
         $deliveryDate = $request->has('delivery_date')
             ? new CarbonImmutable($request->post('delivery_date'))
             : null;
-
+        
         $this->orderRepository->store(
             $request->post('series'),
+            auth()->id(),
             $request->post('name'),
             $request->post('number'),
             (int) $request->post('amount'),

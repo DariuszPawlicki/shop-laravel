@@ -2,7 +2,7 @@ require("./bootstrap");
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./Components/App";
-import LoginPage from "./LoginPage.jsx";
+import LoginPage from "./LoginPage";
 import { Provider } from "react-redux";
 import store from "./Redux/configureStore";
 import {

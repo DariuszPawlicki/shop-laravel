@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid, AppBar, Tabs, Tab, Box, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Orders from "./Orders/Orders";
-import { Link } from "react-router-dom";
+import axios from "axios";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -43,10 +44,15 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
     const [value, setValue] = useState(0);
+    const navigate = useNavigate();
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
     const classes = useStyles();
+
+    const logout = () => {
+        axios.post("/logout").then(() => navigate("/login"));
+    };
 
     return (
         <div className={classes.root}>
@@ -63,7 +69,7 @@ const App = () => {
                             <Button
                                 variant="outlined"
                                 color="error"
-                                onClick={() => axios.post("/logout")}
+                                onClick={logout}
                             >
                                 Logout
                             </Button>

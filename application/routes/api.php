@@ -20,3 +20,5 @@ Route::resource('/orders', OrderController::class)
 Route::resource('/auctions', AuctionController::class)
     ->only(['store']);
 
+
+

@@ -22,10 +22,7 @@
         </style>
     </head>
     <body class="antialiased">
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            <button form_id="logout-form">Logout</button>
-            @csrf
-    </form>
+
         <div id="root"></div>
     </body>
     <script src="/js/app.js"></script>

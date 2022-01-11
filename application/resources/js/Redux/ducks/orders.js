@@ -1,5 +1,4 @@
 export const SET_ORDERS = 'set_orders';
-
 export const GET_ORDERS = 'get_orders'
 
 export const getOrders = () => ({

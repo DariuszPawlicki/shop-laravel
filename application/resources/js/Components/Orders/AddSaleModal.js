@@ -23,7 +23,7 @@ const AddSaleModal = ({order}) => {
                     Dodaj sprzedaż
                 </DialogTitle>
                 <DialogContent>
-                    <form onSubmit={handleSubmit(onSubmit)} id="new-order-form">
+                    <form onSubmit={()=> handleSubmit(onSubmit)} id="new-order-form">
                     </form>
                 </DialogContent>
             </Dialog>

@@ -1,11 +1,12 @@
-import React, {useState} from "react";
-import {Grid, AppBar, Tabs, Tab, Box, Typography} from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import { Grid, AppBar, Tabs, Tab, Box, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 import Orders from "./Orders/Orders";
+import { Link } from "react-router-dom";
 
 function TabPanel(props) {
-    const {children, value, index, ...other} = props;
+    const { children, value, index, ...other } = props;
 
     return (
         <div
@@ -15,11 +16,7 @@ function TabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box p={3}>
-                    {children}
-                </Box>
-            )}
+            {value === index && <Box p={3}>{children}</Box>}
         </div>
     );
 }
@@ -27,21 +24,21 @@ function TabPanel(props) {
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired
 };
 
 function a11yProps(index) {
     return {
         id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
+        "aria-controls": `simple-tabpanel-${index}`
     };
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-        backgroundColor: "#333333",
-    },
+        backgroundColor: "#333333"
+    }
 }));
 
 const App = () => {
@@ -56,16 +53,24 @@ const App = () => {
             <Grid container direction="column">
                 <Grid item>
                     <AppBar position="static">
-                        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                            <Tab label="Zamówienia" {...a11yProps(0)} />
-                            <Tab label="Sprzedane" disabled {...a11yProps(1)} />
+                        <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            aria-label="simple tabs example"
+                        >
+                            <Tab label="Orders" {...a11yProps(0)} />
+
+                            <Button
+                                variant="outlined"
+                                color="error"
+                                onClick={() => axios.post("/logout")}
+                            >
+                                Logout
+                            </Button>
                         </Tabs>
                     </AppBar>
                     <TabPanel value={value} index={0}>
-                        <Orders/>
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                        Item Two
+                        <Orders />
                     </TabPanel>
                 </Grid>
             </Grid>

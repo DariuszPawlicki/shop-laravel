@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Paper, Button, FormControl } from "@material-ui/core";
+import { TextField, Container, Button, FormControl } from "@material-ui/core";
 import { useStyles } from "./style";
 
 const LoginPage = () => {
@@ -18,7 +18,11 @@ const LoginPage = () => {
     };
     console.log("formData", formData);
     return (
-        <Paper color="#1d1d1d" elevation={3} className={classes.wrapperForm}>
+        <Container
+            maxWidth="xl"
+            color="#1d1d1d"
+            className={classes.wrapperForm}
+        >
             <FormControl
                 action="POST"
                 style={{
@@ -63,7 +67,7 @@ const LoginPage = () => {
                     Log In
                 </Button>
             </FormControl>
-        </Paper>
+        </Container>
     );
 };
 

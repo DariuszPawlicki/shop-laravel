@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('layouts.home');
 });
 
 Route::get('/register', function () {
@@ -25,6 +25,7 @@ Route::get('/register', function () {
 Auth::routes();
 
 Route::get('/home', ['middleware' => 'auth', 'uses' => 'App\Http\Controllers\HomeController@index']);
+
 Route::get('/api/orders', ['middleware' => 'auth', 'uses' => 'App\Http\Controllers\OrderController@index']);
 
 Route::post('/api/orders', ['middleware' => 'auth', 'uses' => 'App\Http\Controllers\OrderController@store']);

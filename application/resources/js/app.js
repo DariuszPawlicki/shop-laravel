@@ -8,19 +8,15 @@ import RegisterPage from "./RegisterPage";
 
 import { Provider } from "react-redux";
 import store from "./Redux/configureStore";
-import {
-    BrowserRouter as Router,
-    Route,
-    Routes,
-    Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 ReactDOM.render(
     <Router>
         <Provider store={store}>
             <Routes>
-                <Route exact path="/register" element={<RegisterPage />} />
+                <Route exact path="/" element={<LoginPage />} />
                 <Route exact path="/login" element={<LoginPage />} />
+                <Route exact path="/register" element={<RegisterPage />} />
                 <Route exact path="/home" element={<App />} />
             </Routes>
         </Provider>

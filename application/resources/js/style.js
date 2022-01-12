@@ -5,8 +5,8 @@ export const useStyles = makeStyles(() => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
-        width: "100%",
+        height: "100vh",
+        width: "100vw",
         backgroundColor: "#1d1d1d",
         margin: "auto"
     }

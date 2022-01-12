@@ -51,7 +51,7 @@ const App = () => {
     const classes = useStyles();
 
     const logout = () => {
-        axios.post("/logout").then(() => navigate("/login"));
+        axios.post("/logout").then(() => navigate("/"));
     };
 
     return (

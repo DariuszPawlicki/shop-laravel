@@ -17,7 +17,7 @@ const LoginPage = () => {
     };
 
     const sendData = () => {
-        if (formData === {}) return;
+        if (formData == {}) return;
         axios
             .post("/login", formData)
             .then(() => navigate("/home"))

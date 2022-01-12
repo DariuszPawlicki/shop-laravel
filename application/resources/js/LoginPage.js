@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { TextField, Container, Button, FormControl } from "@material-ui/core";
 import { useStyles } from "./style";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const classes = useStyles();
     const [formData, setData] = useState({});
+
+    const navigate = useNavigate();
 
     const setFormData = e => {
         setData({
@@ -14,7 +17,11 @@ const LoginPage = () => {
     };
 
     const sendData = () => {
-        //tutaj działasz z formData
+        if (formData === {}) return;
+        axios
+            .post("/login", formData)
+            .then(() => navigate("/home"))
+            .catch(error => alert(error));
     };
     console.log("formData", formData);
     return (
@@ -43,8 +50,8 @@ const LoginPage = () => {
                 <TextField
                     style={{ width: "80%", margin: "10px" }}
                     onChange={e => setFormData(e)}
-                    id="login"
-                    label="login"
+                    id="email"
+                    label="email"
                     variant="outlined"
                 />
                 <TextField

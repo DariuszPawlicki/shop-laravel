@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { TextField, Container, Button, FormControl } from "@material-ui/core";
 import { useStyles } from "./style";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
     const classes = useStyles();
     const [formData, setData] = useState({});
+
+    const navigate = useNavigate();
 
     const setFormData = e => {
         setData({
@@ -14,7 +17,11 @@ const RegisterPage = () => {
     };
 
     const sendData = () => {
-        //tutaj działasz z formData
+        if (formData == {}) return;
+        axios
+            .post("/register", formData)
+            .then(() => navigate("/login"))
+            .catch(error => alert(error));
     };
 
     console.log("formData", formData);
@@ -34,13 +41,20 @@ const RegisterPage = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
-                    backgroundColor: "#fffdd0",
+                    backgroundColor: "#c4c3a1",
                     opacity: "0.9",
-                    border: "2px solid #fffdd0",
+                    border: "2px solid #c4c3a1",
                     borderRadius: "20px"
                 }}
             >
                 <h1>Register</h1>
+                <TextField
+                    style={{ width: "80%", margin: "10px" }}
+                    onChange={e => setFormData(e)}
+                    id="name"
+                    label="name"
+                    variant="outlined"
+                />
                 <TextField
                     style={{ width: "80%", margin: "10px" }}
                     onChange={e => setFormData(e)}
@@ -64,8 +78,8 @@ const RegisterPage = () => {
                         margin: "10px 0"
                     }}
                     onChange={e => setFormData(e)}
-                    id="confirmPassword"
-                    label="confirmPassword"
+                    id="password_confirmation"
+                    label="confirm password"
                     variant="outlined"
                 />
                 <Button
@@ -76,6 +90,18 @@ const RegisterPage = () => {
                     color="primary"
                 >
                     Register
+                
+                </Button>
+                <Button
+                    onClick={() => {
+                        navigate('/login');
+                    }}
+                    style={{ width: "60%", marginTop: "5px"}}
+                    variant="outlined"
+                    color="primary"
+                >
+                    Back
+                
                 </Button>
             </FormControl>
         </Container>

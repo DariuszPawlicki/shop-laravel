@@ -76,9 +76,6 @@ const Orders = () => {
                     <Tooltip title="Usuń">
                         <DeleteIcon cursor="pointer" onClick={() => deleteCurrentOrder(params.row.id)}/>
                     </Tooltip>
-                        <Tooltip title={"Dodaj sprzedaż"}>
-                            <AddShoppingCartIcon cursor="pointer" onClick={() => setOrderForSale(params.row)}/>
-                        </Tooltip>
                     </div>
                 );
             },

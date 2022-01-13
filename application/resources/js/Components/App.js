@@ -65,10 +65,9 @@ const App = () => {
                             aria-label="simple tabs example"
                         >
                             <Tab label="Orders" {...a11yProps(0)} />
-
+                            
                             <Button
-                                variant="outlined"
-                                color="error"
+                                style={{color: "#ffffff", fontWeight: "bold"}}
                                 onClick={logout}
                             >
                                 Logout

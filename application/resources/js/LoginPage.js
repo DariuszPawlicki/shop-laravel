@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { TextField, Container, Button, FormControl } from "@material-ui/core";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { useStyles } from "./style";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const LoginPage = () => {
     const classes = useStyles();
@@ -23,6 +25,8 @@ const LoginPage = () => {
             .then(() => navigate("/home"))
             .catch(error => alert(error));
     };
+
+    
     console.log("formData", formData);
     return (
         <Container
@@ -40,9 +44,9 @@ const LoginPage = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
-                    backgroundColor: "#fffdd0",
+                    backgroundColor: "#c4c3a1",
                     opacity: "0.9",
-                    border: "2px solid #fffdd0",
+                    border: "2px solid #c4c3a1",
                     borderRadius: "20px"
                 }}
             >
@@ -72,6 +76,16 @@ const LoginPage = () => {
                     color="primary"
                 >
                     Log In
+                </Button>
+                <Button
+                    onClick={() => {
+                        navigate("/register");
+                    }}
+                    style={{ width: "60%", marginTop: "5px" }}
+                    variant="outlined"
+                    color="primary"
+                >
+                    Register
                 </Button>
             </FormControl>
         </Container>

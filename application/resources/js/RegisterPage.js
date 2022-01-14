@@ -55,6 +55,7 @@ const RegisterPage = () => {
                     }}
                     onChange={e => setFormData(e)}
                     id="password"
+                    type="password"
                     label="password"
                     variant="outlined"
                 />
@@ -65,6 +66,7 @@ const RegisterPage = () => {
                     }}
                     onChange={e => setFormData(e)}
                     id="confirmPassword"
+                    type="password"
                     label="confirmPassword"
                     variant="outlined"
                 />

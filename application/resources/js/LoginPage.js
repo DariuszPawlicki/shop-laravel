@@ -61,6 +61,7 @@ const LoginPage = () => {
                     }}
                     onChange={e => setFormData(e)}
                     id="password"
+                    type="password"
                     label="password"
                     variant="outlined"
                 />

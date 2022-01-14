@@ -3,6 +3,7 @@ version: '3.7'
 services:
   php-fpm:
     image: klocki/php-fpm:${APP_VERSION}
+    container_name: "shop-php-fpm"
     volumes:
       - ../application:/application:delegated
     restart: ${PHP_FPM_RESTART}
@@ -11,6 +12,7 @@ services:
 
   nginx:
     image: klocki/nginx:${APP_VERSION}
+    container_name: "shop-nginx"
     volumes:
       - ../application:/application:delegated
       - ../docker/nginx/ssl:/etc/nginx/ssl
@@ -24,6 +26,7 @@ services:
 
   db:
     image: mysql:5.7.30
+    container_name: "shop-db"
     restart: always
     environment:
       MYSQL_HOST: ${MYSQL_HOST}
